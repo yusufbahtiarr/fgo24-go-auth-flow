@@ -8,36 +8,21 @@ import (
 )
 
 func MainMenu(){
-	reader := bufio.NewReader(os.Stdin)
+    fmt.Print(`Selamat Datang di Aplikasi H21
+1. Register
+2. Login
+3. Forgot Password
 
-  fmt.Println("Selamat Datang di Aplikasi H21 ")
-  fmt.Println("1. Register ")
-  fmt.Println("2. Login")
-  fmt.Println("3. Forgot Password")
-  fmt.Println("")
-  fmt.Println("0. Exit")
-  fmt.Println("")
-  fmt.Print("Pilih Menu : ")
-  menuInput, err := reader.ReadString('\n')
-	if err != nil {
-		os.Exit(0)
-	}
-	menuInput = strings.TrimSpace(menuInput)
-	// fmt.Print("\n")
-	// ShowUser()
-	
-	ClearConsole()
-	if menuInput == "1" {
-		Register()
-	} else if menuInput == "2" {
-		Login()
-	} else if menuInput == "3" {
-		ForgorPassword()
-	} else if menuInput == "0" {
-		os.Exit(0)
-	} else {
-		fmt.Println("Tidak ada menu tersebut.")
-		MainMenu()
-	}
+0. Exit
 
+Pilih Menu: `)
+
+    input, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+    switch strings.TrimSpace(input) {
+    case "1": ClearConsole(); Register()
+    case "2": ClearConsole(); Login()
+    case "3": ClearConsole(); ForgorPassword()
+    case "0": os.Exit(0)
+    default: ClearConsole(); MainMenu()
+    }
 }

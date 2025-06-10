@@ -39,8 +39,9 @@ func Register(){
 
 	AddUser(firstName, lastName, email, passwordEncoded)
 	ClearConsole()
-	fmt.Println("Registrasi Berhasil.")
-	
+	fmt.Print("Registrasi Berhasil. Tekan Enter untuk kembali ke Main Menu...")
+	reader.ReadString('\n')
+	ClearConsole()
 	MainMenu()
 
 	// BackMainMenu()

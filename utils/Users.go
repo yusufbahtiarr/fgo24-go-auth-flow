@@ -1,12 +1,14 @@
 package utils
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
 var Users = []User{}
-var CurrentUser User
+var CurrentUser *User
 
 type User struct {
 	firstName string
@@ -15,24 +17,26 @@ type User struct {
 	password string
 }
 
-func AddUser(firstName, lastName, email, password string){
-	Users = append(Users, User{
-		firstName: firstName,
-		lastName: lastName,
-		email: email,
-		password: password, 
-	})
+func (a User) fullName() string{
+	return fmt.Sprintf("%s %s", a.firstName, a.lastName)
 }
 
-func CheckUser(email string)bool{
-	for _, user := range Users {
-		if strings.ToLower(user.email) == strings.ToLower(email){
-			return true
-		}else{
-			return false
-		}
-	}
-	return false
+type Profile interface {
+	fullName() string
+}
+
+func AddUser(firstName, lastName, email, password string) {
+    Users = append(Users, User{firstName, lastName, email, password})
+}
+
+func CheckUser(email string) bool {
+    email = strings.ToLower(email)
+    for _, user := range Users {
+        if strings.ToLower(user.email) == email {
+            return true
+        }
+    }
+    return false
 }
 
 func LoginUser(email, password string) {
@@ -43,10 +47,13 @@ func LoginUser(email, password string) {
         return
     }
 
-    for _, user := range Users {
+    for i, user := range Users {
         if strings.EqualFold(user.email, email) && user.password == password {
-            CurrentUser = user
-            fmt.Println("Login Sukses")
+            CurrentUser = &Users[i]
+            fmt.Print("Login Sukses. Tekan Enter untuk ke Dashboard...")
+						reader := bufio.NewReader(os.Stdin)
+						reader.ReadString('\n')
+						ClearConsole()
             Dashboard()
             return 
         }
@@ -58,12 +65,18 @@ func LoginUser(email, password string) {
 		
 }
 
-func ChangePassword(email, password string){
-for index, user := range Users {
-		if strings.ToLower(user.email) == strings.ToLower(email){
-			Users[index].password = password
-		}
+func LogoutUser(){
+    CurrentUser = nil
 }
+
+func ChangePassword(email, password string) {
+    email = strings.ToLower(email)
+    for i := range Users {
+        if strings.ToLower(Users[i].email) == email {
+            Users[i].password = password
+            return
+        }
+    }
 }
 
 func ShowUser(){

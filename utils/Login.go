@@ -26,7 +26,5 @@ func Login(){
 	passwordMD5 := GenerateMD5(password)
 	ClearConsole()
 	LoginUser(email, passwordMD5)
-	// Dashboard()
-	// BackMainMenu()
 
 }

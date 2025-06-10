@@ -18,6 +18,6 @@ func ClearConsole(){
         cmd.Stdout = os.Stdout
         cmd.Run()
     default:
-        fmt.Println("\n\n\n") // Fallback untuk OS yang tidak didukung
+        fmt.Println("\n\n\n")
     }
 }
