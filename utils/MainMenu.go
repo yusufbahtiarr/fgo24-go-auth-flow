@@ -15,11 +15,15 @@ func MainMenu(){
   fmt.Println("2. Login")
   fmt.Println("3. Forgot Password")
   fmt.Print("Pilih Menu (1-3): ")
-  menuInput, _ := reader.ReadString('\n')
+  menuInput, err := reader.ReadString('\n')
+	if err != nil {
+		os.Exit(0)
+	}
 	menuInput = strings.TrimSpace(menuInput)
+	// fmt.Print("\n")
+	// ShowUser()
 	
 	ClearConsole()
-	// menu, _ := strconv.Atoi(menuInput)
 	if menuInput == "1" {
 		Register()
 	} else if menuInput == "2" {
@@ -28,6 +32,7 @@ func MainMenu(){
 		ForgorPassword()
 	} else {
 		fmt.Println("Tidak ada menu tersebut.")
-		defer MainMenu()
+		MainMenu()
 	}
+
 }

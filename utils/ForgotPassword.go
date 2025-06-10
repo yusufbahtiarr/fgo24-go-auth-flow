@@ -10,16 +10,20 @@ import (
 func ForgorPassword(){
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Forgot Password ")
- 	fmt.Print("Masukkan Nama:  ")
-	name, _ := reader.ReadString('\n')
-	name = strings.TrimSpace(name)
+ 	fmt.Print("Masukkan Email:  ")
+	email, err := reader.ReadString('\n')
+	if err != nil {
+		os.Exit(0)
+	}
+	email = strings.TrimSpace(email)
  	fmt.Print("Masukkan Password:  ")
-	password, _ := reader.ReadString('\n')
+	password, err := reader.ReadString('\n')
+	if err != nil {
+		os.Exit(0)
+	}
 	password = strings.TrimSpace(password)
 
  	fmt.Println("Password Berhasil di ubah.")
- 	fmt.Println("Nama Anda: ", name)
- 	fmt.Println("Password Anda: ", password)
 
 	BackMainMenu()
 }

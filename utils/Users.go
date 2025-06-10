@@ -1,25 +1,39 @@
 package utils
 
-import "fmt"
+import (
+	"fmt"
+)
 
-var users = []Users{}
+var Users = []User{}
+var CurrentUser User
 
-type Users struct {
+type User struct {
 	name string
 	email string
 	password string
 }
 
-func RegisterUser(name, email, password string){
-	users = append(users, Users{
+func AddUser(name, email, password string){
+	Users = append(Users, User{
 		name: name,
 		email: email,
 		password: password, 
 	})
 }
 
+func LoginUser(email, password string){
+	for _, user := range Users {
+		if user.email == email && user.password == password {
+			fmt.Println("Login Sukses")
+		}else{
+			fmt.Println("User atau Password salah.")
+		}
+
+	}
+}
+
 func ShowUser(){
-	for _, user := range users{
-		fmt.Println(user.name, "-", user.email)
+	for _, user := range Users{
+		fmt.Println(user.name, " | ", user.email, " | ", user.password)
 	}
 }

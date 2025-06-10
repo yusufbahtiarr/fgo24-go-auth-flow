@@ -9,15 +9,22 @@ import (
 
 func Login(){
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Silahkan Login ")
- 	fmt.Print("Masukkan Nama:  ")
-	name, _ := reader.ReadString('\n')
-	name = strings.TrimSpace(name)
- 	fmt.Println("Masukkan Password:  ")
-	password, _:= reader.ReadString('\n')
+	fmt.Println("Silahkan Login ")
+ 	fmt.Print("Masukkan Email: ")
+	email, err := reader.ReadString('\n')
+	if err != nil {
+		os.Exit(0)
+	}
+	email = strings.TrimSpace(email)
+ 	fmt.Print("Masukkan Password: ")
+	password, err:= reader.ReadString('\n')
+	if err != nil {
+		os.Exit(0)
+	}
 	password = strings.TrimSpace(password)
- 	fmt.Println("Login Berhasil.")
-
-	BackMainMenu()
+	ClearConsole()
+	LoginUser(email, password)
+	Dashboard()
+	// BackMainMenu()
 
 }
