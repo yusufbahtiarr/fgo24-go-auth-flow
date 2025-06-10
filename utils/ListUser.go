@@ -7,10 +7,17 @@ import (
 	"strings"
 )
 
-func Logout(){
+func ListUser(){
+	for i, user:= range Users{
+		fmt.Printf("%d.\n", i+1) 
+		fmt.Println("Full Name :", user.firstName, user.lastName)
+		fmt.Println("Email :", user.email)
+		fmt.Println("Password :", user.password)
+		fmt.Println("")
+	}
+
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println(" ")
-	fmt.Print("Logout [y/n]: ")
+	fmt.Print("\nKembali ke Dashboard [y/n]: ")
  	menuInput, err := reader.ReadString('\n')
 	if err != nil {
 		os.Exit(0)
@@ -19,12 +26,13 @@ func Logout(){
 	
 	if menuInput == "y" {
 		ClearConsole()
-		MainMenu()
+		Dashboard()
 	} else if menuInput == "n" {
 		ClearConsole()
-		Dashboard()
+		ListUser()
 	} else {
 		fmt.Println("Tidak ada menu tersebut.")
-		Logout()
+		ListUser()
 	}
+
 }

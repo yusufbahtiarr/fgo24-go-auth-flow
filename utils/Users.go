@@ -9,14 +9,16 @@ var Users = []User{}
 var CurrentUser User
 
 type User struct {
-	name string
+	firstName string
+	lastName string
 	email string
 	password string
 }
 
-func AddUser(name, email, password string){
+func AddUser(firstName, lastName, email, password string){
 	Users = append(Users, User{
-		name: name,
+		firstName: firstName,
+		lastName: lastName,
 		email: email,
 		password: password, 
 	})
@@ -33,16 +35,27 @@ func CheckUser(email string)bool{
 	return false
 }
 
-func LoginUser(email, password string){
-	for _, user := range Users {
-		if strings.ToLower(user.email) == strings.ToLower(email) && user.password == password {
-			fmt.Println("Login Sukses")
-			Dashboard()
-		}else{
-			fmt.Println("User atau Password salah.")
-			Login()
-		}
-	}
+func LoginUser(email, password string) {
+    if email == "" || password == "" {
+        fmt.Println("Email atau password tidak boleh kosong")
+				ClearConsole()
+				Login()
+        return
+    }
+
+    for _, user := range Users {
+        if strings.EqualFold(user.email, email) && user.password == password {
+            CurrentUser = user
+            fmt.Println("Login Sukses")
+            Dashboard()
+            return 
+        }
+    }
+
+		ClearConsole()
+    fmt.Println("Email atau password salah")
+		Login()
+		
 }
 
 func ChangePassword(email, password string){
@@ -55,6 +68,6 @@ for index, user := range Users {
 
 func ShowUser(){
 	for _, user := range Users{
-		fmt.Println(user.name, " | ", user.email, " | ", user.password)
+		fmt.Println(user.firstName, user.lastName, "|", user.email, "|", user.password)
 	}
 }
