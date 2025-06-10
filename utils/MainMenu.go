@@ -10,7 +10,7 @@ import (
 func MainMenu(){
 	reader := bufio.NewReader(os.Stdin)
 
-  fmt.Println("Selamat Datang di Aplikasi ini ")
+  fmt.Println("Selamat Datang di Aplikasi H21 ")
   fmt.Println("1. Register ")
   fmt.Println("2. Login")
   fmt.Println("3. Forgot Password")

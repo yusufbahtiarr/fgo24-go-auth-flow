@@ -25,8 +25,10 @@ func LoginUser(email, password string){
 	for _, user := range Users {
 		if user.email == email && user.password == password {
 			fmt.Println("Login Sukses")
+			Dashboard()
 		}else{
 			fmt.Println("User atau Password salah.")
+			Login()
 		}
 
 	}

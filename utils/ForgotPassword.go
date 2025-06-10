@@ -10,6 +10,7 @@ import (
 func ForgorPassword(){
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Forgot Password ")
+	fmt.Println("======================")
  	fmt.Print("Masukkan Email:  ")
 	email, err := reader.ReadString('\n')
 	if err != nil {

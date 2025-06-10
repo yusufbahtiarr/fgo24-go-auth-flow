@@ -9,7 +9,8 @@ import (
 
 func Register(){
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("Silahkan registrasi ")
+	fmt.Println("Silahkan Registrasi ")
+	fmt.Println("======================")
  	fmt.Print("Masukkan Nama: ")
 	name, err := reader.ReadString('\n')
 	if err != nil {
@@ -28,8 +29,9 @@ func Register(){
 		os.Exit(0)
 	}
 	password = strings.TrimSpace(password)
-	AddUser(name, email, password)
-	// fmt.Println("")
+	passwordEncoded := GenerateMD5(password)
+
+	AddUser(name, email, passwordEncoded)
 	ClearConsole()
 	fmt.Println("Registrasi Berhasil.")
 	
