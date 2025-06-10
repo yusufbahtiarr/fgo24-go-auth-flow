@@ -17,14 +17,22 @@ func ForgorPassword(){
 		os.Exit(0)
 	}
 	email = strings.TrimSpace(email)
- 	fmt.Print("Masukkan Password:  ")
+	
+	if !CheckUser(email){
+		ClearConsole()
+		fmt.Println("Email tidak terdaftar")
+		ForgorPassword()
+	}
+ 	fmt.Print("Masukkan Password Baru:  ")
 	password, err := reader.ReadString('\n')
 	if err != nil {
 		os.Exit(0)
 	}
 	password = strings.TrimSpace(password)
+	passwordEncoded := GenerateMD5(password)
 
+	ChangePassword(email, passwordEncoded)
+	ClearConsole()
  	fmt.Println("Password Berhasil di ubah.")
-
-	BackMainMenu()
+	MainMenu()
 }

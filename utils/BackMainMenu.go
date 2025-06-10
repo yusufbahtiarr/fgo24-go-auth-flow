@@ -18,7 +18,7 @@ func BackMainMenu(){
 	menuInput = strings.TrimSpace(menuInput)
 	
 	if menuInput == "0" {
-		// ClearConsole()
+		ClearConsole()
 		MainMenu()
 	} else {
 		fmt.Println("Tidak ada menu tersebut.")
